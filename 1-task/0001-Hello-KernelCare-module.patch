@@ -1,0 +1,53 @@
+From abd86a3e3cc12558d6a67bde5a17bc8bf6339ffa Mon Sep 17 00:00:00 2001
+From: Nikolay Boldyrev <nick.alsh94@gmail.com>
+Date: Sun, 11 Aug 2024 11:50:21 +0300
+Subject: [PATCH] Hello KernelCare module
+
+Signed-off-by: Nikolay Boldyrev <nick.alsh94@gmail.com>
+---
+ samples/hello_world/Makefile           |  5 +++++
+ samples/hello_world/hello_kernelcare.c | 20 ++++++++++++++++++++
+ 2 files changed, 25 insertions(+)
+ create mode 100644 samples/hello_world/Makefile
+ create mode 100644 samples/hello_world/hello_kernelcare.c
+
+diff --git a/samples/hello_world/Makefile b/samples/hello_world/Makefile
+new file mode 100644
+index 0000000..e7980de
+--- /dev/null
++++ b/samples/hello_world/Makefile
+@@ -0,0 +1,5 @@
++# SPDX-License-Identifier: GPL-2.0-only
++
++obj-m += hello_kernelcare.o
++
++CFLAGS_hello_kernelcare.o := -DDEBUG
+diff --git a/samples/hello_world/hello_kernelcare.c b/samples/hello_world/hello_kernelcare.c
+new file mode 100644
+index 0000000..156898f
+--- /dev/null
++++ b/samples/hello_world/hello_kernelcare.c
+@@ -0,0 +1,20 @@
++// SPDX-License-Identified: GPL-2.0-or-later
++#include <linux/module.h>
++#include <linux/kernel.h>
++#include <linux/init.h>
++
++static int __init module_start(void)
++{
++	pr_debug("Hello, KernelCare!\n");
++	return 0;
++}
++
++static void __exit module_end(void)
++{
++	pr_debug("Bye!\n");
++}
++
++module_init(module_start);
++module_exit(module_end);
++
++MODULE_LICENSE("GPL");
+-- 
+2.46.0
+
